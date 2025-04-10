@@ -1,0 +1,84 @@
+('/Volumes/VS/My '
+ 'Work/apps/Inventory-Management-System/build/InventorySystem/InventorySystem',
+ False,
+ False,
+ True,
+ ['/Volumes/VS/My Work/apps/Inventory-Management-System/logo/icon.png'],
+ None,
+ False,
+ False,
+ None,
+ True,
+ False,
+ 'arm64',
+ None,
+ None,
+ '/Volumes/VS/My '
+ 'Work/apps/Inventory-Management-System/build/InventorySystem/InventorySystem.pkg',
+ [('pyi-contents-directory _internal', '', 'OPTION'),
+  ('PYZ-00.pyz',
+   '/Volumes/VS/My '
+   'Work/apps/Inventory-Management-System/build/InventorySystem/PYZ-00.pyz',
+   'PYZ'),
+  ('lib-dynload/_struct.cpython-313-darwin.so',
+   '/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/_struct.cpython-313-darwin.so',
+   'EXTENSION'),
+  ('lib-dynload/zlib.cpython-313-darwin.so',
+   '/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/lib-dynload/zlib.cpython-313-darwin.so',
+   'EXTENSION'),
+  ('struct',
+   '/Volumes/VS/My '
+   'Work/apps/Inventory-Management-System/build/InventorySystem/localpycs/struct.pyc',
+   'PYMODULE'),
+  ('pyimod01_archive',
+   '/Volumes/VS/My '
+   'Work/apps/Inventory-Management-System/build/InventorySystem/localpycs/pyimod01_archive.pyc',
+   'PYMODULE'),
+  ('pyimod02_importers',
+   '/Volumes/VS/My '
+   'Work/apps/Inventory-Management-System/build/InventorySystem/localpycs/pyimod02_importers.pyc',
+   'PYMODULE'),
+  ('pyimod03_ctypes',
+   '/Volumes/VS/My '
+   'Work/apps/Inventory-Management-System/build/InventorySystem/localpycs/pyimod03_ctypes.pyc',
+   'PYMODULE'),
+  ('pyiboot01_bootstrap',
+   '/Volumes/VS/My '
+   'Work/apps/Inventory-Management-System/venv/lib/python3.13/site-packages/PyInstaller/loader/pyiboot01_bootstrap.py',
+   'PYSOURCE'),
+  ('pyi_rth_inspect',
+   '/Volumes/VS/My '
+   'Work/apps/Inventory-Management-System/venv/lib/python3.13/site-packages/PyInstaller/hooks/rthooks/pyi_rth_inspect.py',
+   'PYSOURCE'),
+  ('pyi_rth_pkgutil',
+   '/Volumes/VS/My '
+   'Work/apps/Inventory-Management-System/venv/lib/python3.13/site-packages/PyInstaller/hooks/rthooks/pyi_rth_pkgutil.py',
+   'PYSOURCE'),
+  ('pyi_rth_multiprocessing',
+   '/Volumes/VS/My '
+   'Work/apps/Inventory-Management-System/venv/lib/python3.13/site-packages/PyInstaller/hooks/rthooks/pyi_rth_multiprocessing.py',
+   'PYSOURCE'),
+  ('pyi_rth_pkgres',
+   '/Volumes/VS/My '
+   'Work/apps/Inventory-Management-System/venv/lib/python3.13/site-packages/PyInstaller/hooks/rthooks/pyi_rth_pkgres.py',
+   'PYSOURCE'),
+  ('pyi_rth_setuptools',
+   '/Volumes/VS/My '
+   'Work/apps/Inventory-Management-System/venv/lib/python3.13/site-packages/PyInstaller/hooks/rthooks/pyi_rth_setuptools.py',
+   'PYSOURCE'),
+  ('pyi_rth__tkinter',
+   '/Volumes/VS/My '
+   'Work/apps/Inventory-Management-System/venv/lib/python3.13/site-packages/PyInstaller/hooks/rthooks/pyi_rth__tkinter.py',
+   'PYSOURCE'),
+  ('login',
+   '/Volumes/VS/My Work/apps/Inventory-Management-System/login.py',
+   'PYSOURCE')],
+ [],
+ False,
+ False,
+ 1742540671,
+ [('runw',
+   '/Volumes/VS/My '
+   'Work/apps/Inventory-Management-System/venv/lib/python3.13/site-packages/PyInstaller/bootloader/Darwin-64bit/runw',
+   'EXECUTABLE')],
+ '/opt/homebrew/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/Python')
