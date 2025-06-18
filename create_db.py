@@ -1,9 +1,9 @@
 import sqlite3
 import os
+from utils import get_db_path
 def create_db():
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    db_path = os.path.join(BASE_DIR, "ims.db")
-    con = sqlite3.connect(database=db_path)
+    db_path = get_db_path()
+    con = sqlite3.connect(db_path)
     cur = con.cursor()
 
     # Create Employee Table

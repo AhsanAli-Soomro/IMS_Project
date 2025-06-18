@@ -5,22 +5,14 @@ import sqlite3
 import os,sys
 import datetime
 import importlib  # To handle imports dynamically
+from utils import get_db_path
 
 # Get the base directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-def resource_path(relative_path):
-    """Get absolute path to resource, works for dev and PyInstaller."""
-    try:
-        base_path = sys._MEIPASS
-    except AttributeError:
-        base_path = os.path.dirname(os.path.abspath(__file__)) 
-    return os.path.join(base_path, relative_path)
 
+con = sqlite3.connect(get_db_path())
 
-# ✅ Get the database path
-DB_PATH = resource_path('ims.db')
-con = sqlite3.connect(DB_PATH)
 
 
 
@@ -89,14 +81,17 @@ class LoginSystem:
             return
 
         # ✅ Print debug info
-        print(f"Connecting to database at: {DB_PATH}")
+        db_path = get_db_path()
+        print(f"Connecting to database at: {db_path}")
+
 
         # ✅ Define con before the try block
         con = None
 
         try:
             # ✅ Now connect to the database
-            con = sqlite3.connect(DB_PATH)
+            db_path = get_db_path()
+            con = sqlite3.connect(db_path)
             cur = con.cursor()
             cur.execute("SELECT utype FROM employee WHERE eid=? AND pass=?", (emp_id, password))
             user = cur.fetchone()
@@ -144,7 +139,8 @@ class LoginSystem:
         print(f"Logging action: {action} for Employee ID: {emp_id} at {timestamp}")
 
         try:
-            con = sqlite3.connect(DB_PATH)
+            db_path = get_db_path()
+            con = sqlite3.connect(db_path)
             cur = con.cursor()
 
             # ✅ Store timestamp with each log entry

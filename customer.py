@@ -4,17 +4,10 @@ from tkinter import ttk, messagebox
 import sqlite3,sys,os
 import os, sys
 
-def resource_path(relative_path):
-    """ Get absolute path to resource, works for dev and PyInstaller """
-    try:
-        base_path = sys._MEIPASS  # When running from PyInstaller bundle
-    except AttributeError:
-        base_path = os.path.dirname(os.path.abspath(__file__))  # When running normally
-    return os.path.join(base_path, relative_path)
+from utils import get_db_path
 
+con = sqlite3.connect(get_db_path())
 
-DB_PATH = resource_path('ims.db')  # ✅ Ensures correct path in .exe
-con = sqlite3.connect(DB_PATH)
 class CustomerClass(Frame):
     def __init__(self, parent):
         super().__init__(parent)
@@ -108,7 +101,7 @@ class CustomerClass(Frame):
 
     # ---------- Database Functions ----------
     def add(self):
-        con = sqlite3.connect(resource_path("ims.db"))  # ✅ Uses the correct path
+        con = sqlite3.connect(get_db_path())  # ✅ Uses the correct path
         cur = con.cursor()
         try:
             if self.var_name.get() == "" or self.var_contact.get() == "":
@@ -133,7 +126,7 @@ class CustomerClass(Frame):
         if not hasattr(self, 'CustomerTable'):  # Prevents errors if table is not initialized
             return
 
-        con = sqlite3.connect(resource_path("ims.db"))  # ✅ Uses the correct path
+        con = sqlite3.connect(get_db_path())  # ✅ Uses the correct path
         cur = con.cursor()
         try:
             cur.execute("SELECT * FROM customer")  # Fetch all customer data
@@ -163,7 +156,7 @@ class CustomerClass(Frame):
 
 
     def delete(self):
-        con = sqlite3.connect(resource_path("ims.db"))  # ✅ Uses the correct path
+        con = sqlite3.connect(get_db_path())  # ✅ Uses the correct path
 
         cur = con.cursor()
         try:
@@ -188,7 +181,7 @@ class CustomerClass(Frame):
 
 
     def update(self):
-        con = sqlite3.connect(resource_path("ims.db"))  # ✅ Uses the correct path
+        con = sqlite3.connect(get_db_path())  # ✅ Uses the correct path
         cur = con.cursor()
         try:
             if self.var_cust_id.get() == "":
@@ -227,7 +220,7 @@ class CustomerClass(Frame):
 
 
     def search(self):
-        con = sqlite3.connect(resource_path("ims.db"))  # ✅ Uses the correct path
+        con = sqlite3.connect(get_db_path())  # ✅ Uses the correct path
 
         cur = con.cursor()
         try:

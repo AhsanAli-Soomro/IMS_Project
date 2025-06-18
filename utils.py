@@ -1,25 +1,29 @@
 import sqlite3
 import datetime
 import os
+import sys
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Determine base directory (where the script or exe is located)
+def get_db_path():
+    """
+    Returns the full path to the ims.db file,
+    resolving correctly even when bundled with PyInstaller.
+    """
+    if getattr(sys, 'frozen', False):  # PyInstaller executable
+        base_path = os.path.dirname(sys.executable)
+    else:  # Running as a script
+        base_path = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(base_path, "ims.db")
+
 
 def log_activity(emp_id, action, invoice_no=None):
     """
     Logs user activities (LOGIN, LOGOUT, BILL_CREATED, etc.) in the logs table.
-    
-    Args:
-        emp_id (str): Employee ID of the user performing the action.
-        action (str): The action being logged (e.g., LOGIN, LOGOUT, BILL_CREATED).
-        invoice_no (str or None): Invoice number if applicable (for BILL_CREATED actions).
-
-    Returns:
-        None
     """
-    con = sqlite3.connect(database=os.path.join(BASE_DIR, 'ims.db'))
+    con = sqlite3.connect(get_db_path())
     cur = con.cursor()
     try:
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Get current timestamp
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         cur.execute("INSERT INTO logs (emp_id, action, timestamp, invoice_no) VALUES (?, ?, ?, ?)",
                     (emp_id, action, timestamp, invoice_no))
         con.commit()
@@ -28,15 +32,12 @@ def log_activity(emp_id, action, invoice_no=None):
     finally:
         con.close()
 
+
 def create_logs_table():
     """
     Creates the 'logs' table in the database if it doesn't exist.
-    This is useful to ensure logging works without manual table creation.
-
-    Returns:
-        None
     """
-    con = sqlite3.connect(database=os.path.join(BASE_DIR, 'ims.db'))
+    con = sqlite3.connect(get_db_path())
     cur = con.cursor()
     try:
         cur.execute("""
@@ -54,5 +55,6 @@ def create_logs_table():
     finally:
         con.close()
 
-# Run table creation once when the module is imported
+
+# Automatically ensure logs table exists on import
 create_logs_table()

@@ -3,18 +3,10 @@ from PIL import Image, ImageTk
 from tkinter import ttk, messagebox
 import sqlite3,sys,os
 import os, sys
+from utils import get_db_path
 
-def resource_path(relative_path):
-    """ Get absolute path to resource, works for dev and PyInstaller """
-    try:
-        base_path = sys._MEIPASS  # When running from PyInstaller bundle
-    except AttributeError:
-        base_path = os.path.dirname(os.path.abspath(__file__))  # When running normally
-    return os.path.join(base_path, relative_path)
+con = sqlite3.connect(get_db_path())
 
-
-DB_PATH = resource_path('ims.db')  # ✅ Ensures correct path in .exe
-con = sqlite3.connect(DB_PATH)
 class employeeClass(Frame):
     def __init__(self, parent):
         super().__init__(parent)
@@ -136,7 +128,7 @@ class employeeClass(Frame):
 
 #-----------------------------------------------------------------------------------------------------
     def add(self):
-        con = sqlite3.connect(resource_path("ims.db"))
+        con = sqlite3.connect(get_db_path())
         cur=con.cursor()
         try:
             if self.var_emp_id.get()=="":
@@ -168,7 +160,7 @@ class employeeClass(Frame):
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
     def show(self):
-        con = sqlite3.connect(resource_path("ims.db"))
+        con = sqlite3.connect(get_db_path())
         cur=con.cursor()
         try:
             cur.execute("select * from employee")
@@ -206,7 +198,7 @@ class employeeClass(Frame):
 
 
     def update(self):
-        con = sqlite3.connect(resource_path("ims.db"))
+        con = sqlite3.connect(get_db_path())
         cur=con.cursor()
         try:
             if self.var_emp_id.get()=="":
@@ -237,7 +229,7 @@ class employeeClass(Frame):
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
     def delete(self):
-        con = sqlite3.connect(resource_path("ims.db"))
+        con = sqlite3.connect(get_db_path())
         cur=con.cursor()
         try:
             if self.var_emp_id.get()=="":
@@ -274,7 +266,7 @@ class employeeClass(Frame):
         self.show()
 
     def search(self):
-        con = sqlite3.connect(resource_path("ims.db"))
+        con = sqlite3.connect(get_db_path())
         cur=con.cursor()
         try:
             if self.var_searchby.get()=="Select":

@@ -9,23 +9,16 @@ import subprocess
 import platform
 import datetime
 import importlib
+from utils import get_db_path
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 image_path = os.path.join(BASE_DIR, "logo", "company_logo.png")
 
 
-def resource_path(relative_path):
-    """Get absolute path to resource, works for dev and PyInstaller."""
-    try:
-        base_path = sys._MEIPASS  # When running from PyInstaller
-    except AttributeError:
-        base_path = os.path.dirname(os.path.abspath(__file__))  # When running normally
-    return os.path.join(base_path, relative_path)
 
+con = sqlite3.connect(get_db_path())
 
-DB_PATH = resource_path('ims.db')  # ✅ Ensures correct path in .exe
-con = sqlite3.connect(DB_PATH)
 
 
 
@@ -331,7 +324,7 @@ class billClass:
         btn_print.place(x=2, y=80, width=120, height=50)
 
         # ✅ Fetch Discount from Database on Startup
-        DB_PATH = resource_path('ims.db')
+        DB_PATH = get_db_path()
         con = sqlite3.connect(DB_PATH)
 
         cur = con.cursor()
@@ -485,7 +478,8 @@ class billClass:
 
 
     def show(self):
-        con = sqlite3.connect(resource_path("ims.db"))  # ✅ Uses the correct path
+        con = sqlite3.connect(get_db_path())
+  # ✅ Uses the correct path
         cur=con.cursor()
         try:
             cur.execute("select pid,name,price,qty,status from product where status='Active'")
@@ -497,7 +491,8 @@ class billClass:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
     def search(self):
-        con = sqlite3.connect(resource_path("ims.db"))  # ✅ Uses the correct path
+        con = sqlite3.connect(get_db_path())
+  # ✅ Uses the correct path
         cur=con.cursor()
         try:
             if self.var_search.get()=="":
@@ -571,7 +566,7 @@ class billClass:
 
     def bill_update(self):
         """Calculate bill amount and apply discount from settings."""
-        DB_PATH = resource_path('ims.db')
+        DB_PATH = get_db_path()
         con = sqlite3.connect(DB_PATH)
 
         cur = con.cursor()
@@ -623,7 +618,7 @@ class billClass:
         # ✅ **Correct invoice number generated once**
         self.invoice = int(time.strftime("%H%M%S")) + int(time.strftime("%d%m%Y"))
 
-        DB_PATH = resource_path('ims.db')
+        DB_PATH = get_db_path()
         con = sqlite3.connect(DB_PATH)
         cur = con.cursor()
 
@@ -667,7 +662,8 @@ class billClass:
 
     def load_customers(self):
         """Fetch customer names and IDs from database and load them into the dropdown."""
-        con = sqlite3.connect(resource_path("ims.db"))  # ✅ Uses the correct path
+        con = sqlite3.connect(get_db_path())
+  # ✅ Uses the correct path
         cur = con.cursor()
         try:
             cur.execute("SELECT id, name FROM customer ORDER BY name ASC")
@@ -691,7 +687,8 @@ class billClass:
         # Extract Customer ID from selected value
         customer_id = selected_customer.split(" - ")[0]
 
-        con = sqlite3.connect(resource_path("ims.db"))  # ✅ Uses the correct path
+        con = sqlite3.connect(get_db_path())
+  # ✅ Uses the correct path
         cur = con.cursor()
         try:
             cur.execute("SELECT name, contact FROM customer WHERE id=?", (customer_id,))
@@ -711,7 +708,7 @@ class billClass:
 
     def bill_top(self):
         """Fetch company details from settings and display them on the bill."""
-        DB_PATH = resource_path('ims.db')
+        DB_PATH = get_db_path()
         con = sqlite3.connect(DB_PATH)
 
         cur = con.cursor()
@@ -762,7 +759,8 @@ class billClass:
 
 
     def bill_middle(self):
-        con = sqlite3.connect(resource_path("ims.db"))  # ✅ Uses the correct path
+        con = sqlite3.connect(get_db_path())
+  # ✅ Uses the correct path
         cur=con.cursor()
         try:
             for row in self.cart_list:

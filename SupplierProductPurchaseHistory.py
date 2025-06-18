@@ -3,17 +3,9 @@ from tkinter import ttk, messagebox
 import sqlite3, os, sys
 
 import os, sys
+from utils import get_db_path
+DB_PATH = get_db_path()
 
-def resource_path(relative_path):
-    """ Get absolute path to resource, works for dev and PyInstaller """
-    try:
-        base_path = sys._MEIPASS  # When running from PyInstaller bundle
-    except AttributeError:
-        base_path = os.path.dirname(os.path.abspath(__file__))  # When running normally
-    return os.path.join(base_path, relative_path)
-
-
-DB_PATH = resource_path('ims.db')
 
 class SupplierPurchaseHistory:
     def __init__(self, root):

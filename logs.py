@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk, messagebox
 import sqlite3
 import os
+from db import get_connection  # or from utils import get_db_path
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -70,7 +71,7 @@ class LogsPage(Frame):
     def show_logs(self):
         """Fetch and display all logs."""
         self.var_search.set("")  # Clear search field
-        con = sqlite3.connect(os.path.join(BASE_DIR, 'ims.db'))
+        con = get_connection()
         cur = con.cursor()
         cur.execute("SELECT id, emp_id, action, COALESCE(invoice_no, 'N/A'), timestamp FROM logs ORDER BY timestamp DESC")
         rows = cur.fetchall()
@@ -86,7 +87,7 @@ class LogsPage(Frame):
             messagebox.showerror("Error", "Please enter Invoice No or Employee ID", parent=self)
             return
 
-        con = sqlite3.connect(os.path.join(BASE_DIR, 'ims.db'))
+        con = get_connection()
         cur = con.cursor()
         try:
             query = """

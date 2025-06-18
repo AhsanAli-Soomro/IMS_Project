@@ -3,17 +3,10 @@ from PIL import Image, ImageTk
 from tkinter import ttk, messagebox
 import sqlite3
 import os,sys  # ✅ Import OS for handling paths
-def resource_path(relative_path):
-    """Get absolute path to resource, works for dev and PyInstaller."""
-    try:
-        base_path = sys._MEIPASS  # When running from PyInstaller
-    except AttributeError:
-        base_path = os.path.dirname(os.path.abspath(__file__))  # When running normally
-    return os.path.join(base_path, relative_path)
+from utils import get_db_path
 
+con = sqlite3.connect(get_db_path())
 
-DB_PATH = resource_path('ims.db')  # ✅ Ensures correct path in .exe
-con = sqlite3.connect(DB_PATH)
 class categoryClass(Frame):
     def __init__(self, parent):
         super().__init__(parent)
@@ -120,7 +113,7 @@ class categoryClass(Frame):
 
     # ----------------- Database Methods -----------------
     def add(self):
-        con = sqlite3.connect(resource_path("ims.db"))  # ✅ Uses the correct path
+        con = sqlite3.connect(get_db_path())  # ✅ Uses the correct path
         cur = con.cursor()
         try:
             if self.var_name.get() == "":
@@ -140,7 +133,7 @@ class categoryClass(Frame):
             messagebox.showerror("Error", f"Error due to : {str(ex)}")
 
     def show(self):
-        con = sqlite3.connect(resource_path("ims.db"))  # ✅ Uses the correct path
+        con = sqlite3.connect(get_db_path())  # ✅ Uses the correct path
         cur = con.cursor()
         try:
             cur.execute("select * from category")
@@ -164,7 +157,7 @@ class categoryClass(Frame):
             self.var_name.set(row[1])
 
     def delete(self):
-        con = sqlite3.connect(resource_path("ims.db"))  # ✅ Uses the correct path
+        con = sqlite3.connect(get_db_path())  # ✅ Uses the correct path
         cur = con.cursor()
         try:
             if self.var_cat_id.get() == "":
